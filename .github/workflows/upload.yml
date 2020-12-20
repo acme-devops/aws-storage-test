@@ -7,6 +7,7 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -17,7 +18,5 @@ jobs:
         env:
           aws-bucket: ${{ secrets.AWS_BUCKET }}
 
-      - run: ls
-
       - name: Upload
-        run: sudo aws s3 cp ./images/test.png s3://$aws-bucket/8/201220/android
+        run: sudo aws s3 cp images/test.png s3://$aws-bucket/8/201220/android
