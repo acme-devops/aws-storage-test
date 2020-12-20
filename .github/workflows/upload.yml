@@ -18,4 +18,4 @@ jobs:
           aws configure set aws_secret_access_key $aws_secret_access_key
 
       - name: Upload
-        run: aws s3 sync "./images/test.png" s3://$aws_s3_bucket/8/201220/android
+        run: aws s3 cp images/test.png s3://$aws_s3_bucket/8/201220/android
