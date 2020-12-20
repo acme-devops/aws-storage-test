@@ -1,7 +1,7 @@
 name: Upload to S3
 
 on:
-  workflow_dispatch:
+  push:
 
 jobs:
   upload:
@@ -17,7 +17,7 @@ jobs:
         env:
           aws-bucket: ${{ secrets.AWS_BUCKET }}
 
-      - run: pwd
+      - run: ls
 
       - name: Upload
-        run: aws s3 cp /home/runner/work/aws-storage-test/aws-storage-test/images/test.png s3://$aws-bucket/8/201220/android
+        run: aws s3 cp ./images/test.png s3://$aws-bucket/8/201220/android
