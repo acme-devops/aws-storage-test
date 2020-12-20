@@ -17,5 +17,7 @@ jobs:
         env:
           aws-bucket: ${{ secrets.AWS_BUCKET }}
 
+      - run: pwd
+
       - name: Upload
         run: aws s3 sync images s3://$aws-bucket/8/201220/android
