@@ -15,8 +15,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-        env:
-          aws_bucket: ${{ secrets.AWS_BUCKET }}
 
       - name: Upload
-        run: aws s3 cp images/test.png s3://$aws_bucket/8/201220/android
+        run: aws s3 cp images/test.png s3://${{ secrets.AWS_BUCKET }}/8/201220/android
