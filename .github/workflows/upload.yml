@@ -8,10 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install AWS CLI
-        run: sudo apt-get -y install awscli
+        env:
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_s3_bucket: ${{ secrets.AWS_BUCKET }}
+        run: |
+          sudo apt-get -y install awscli
+          aws configure set aws_access_key_id $aws_key_id
+          aws configure set aws_secret_access_key $aws_secret_access_key
 
       - name: Upload
-        run: |
-          aws configure set aws_access_key_id ${{ secrets.AWS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws s3 images/test.png s3://${{ secrets.AWS_BUCKET }}/8/201220/android
+        run: aws s3 images/test.png s3://$aws_s3_bucket/8/201220/android
