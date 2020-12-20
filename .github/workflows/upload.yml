@@ -17,4 +17,4 @@ jobs:
           aws-region: us-east-1
 
       - name: Upload
-        run: aws s3 cp images/test.png s3://${{ secrets.AWS_BUCKET }}/8/201220/android
+        run: aws s3 cp images/test.png s3://${{ secrets.AWS_BUCKET }}/8/201220/android/
