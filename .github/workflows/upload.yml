@@ -7,14 +7,14 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
-      - name: Configure AWS
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
-          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_s3_bucket: ${{ secrets.AWS_BUCKET }}
-        run: |
-          aws configure set aws_access_key_id $aws_key_id
-          aws configure set aws_secret_access_key $aws_secret_access_key
+          aws-bucket: ${{ secrets.AWS_BUCKET }}
 
       - name: Upload
-        run: aws s3 cp ./images/test.png s3://$aws_s3_bucket/8/201220/android
+        run: aws s3 cp /images/test.png s3://$aws-bucket/8/201220/android
